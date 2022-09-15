@@ -37,8 +37,6 @@ function useProvideAuth() {
         .then((session) => {
           const { idToken, accessToken } = session;
 
-          console.log(idToken);
-
           // Define your user schema per your needs
           const user = {
             email: idToken.payload.email,
@@ -65,9 +63,11 @@ function useProvideAuth() {
         signInUserSession: { accessToken },
       } = cognitoUser;
 
+      console.log(cognitoUser)
+
       const user = {
         email: attributes.email,
-        username: attributes.perfered_username,
+        username: cognitoUser.username,
         userId: attributes.sub,
         accessToken: accessToken.jwtToken,
       };
